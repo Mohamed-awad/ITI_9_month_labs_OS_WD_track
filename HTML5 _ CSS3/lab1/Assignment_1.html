@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            progress::-webkit-progress-bar {
+            /* style rules */
+            }
+            progress::-webkit-progress-value {
+            /* style rules */
+            }
+
+            progress{
+                margin: auto;
+                background-color: orange;
+                border: 0;
+                height: 25px;
+                border-radius: 20px;
+            }
+            p {
+                position: absolute;
+                left: 50px;
+                top: 65px;
+                font-size: 20px;
+                display: none;
+            }
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Progress bar demo</h1>
+        </header>
+        <main>
+            <progress value="0" max="10"></progress>
+            <br><br>
+            <p>done</p>
+        </main>
+        <footer>
+
+        </footer>
+        <script>
+            let pp = document.getElementsByTagName("progress");
+            let pa1 = document.getElementsByTagName('p')[0];
+            let dd = setInterval(() =>{
+                let min_val = parseInt(pp[0].value);
+                
+                if(min_val === 9)
+                {
+                    let pa1 = document.getElementsByTagName("p")[0];
+                    pa1.style.display = "inline";
+                    min_val = -1;
+                    clearInterval(dd);
+                }
+                min_val += 1;
+                pp[0].value = min_val;
+            },(Math.random() * 100));
+        </script>
+    </body>
+</html>

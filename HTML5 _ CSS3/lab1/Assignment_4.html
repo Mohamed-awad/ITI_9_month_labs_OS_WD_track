@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+           
+            button {
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Form</h1>
+        </header>
+        <main>
+           <form>
+               <label>search:</label>
+               <input type="search">
+               <button>go</button><br>
+               <label>Name:</label>
+               <input type="text" placeholder="full name"><br>
+               <label>email: </label>
+               <input type="email"><br>
+               <label>url:</label>
+               <input type="url"><br>
+               <label>phone:</label>
+               <input type="text" pattern="01[0-9]{9}"><br>
+               <label>n in y of dev</label>
+               <input type="number" min="0" max="10"><br>
+               <label>dev ex</label>
+               <input name="k" type="range" value="25" max="50"><span>25</span> <br>
+               <label>t-shirt color:</label>
+               <input list="cc" ><br>
+               <datalist id="cc">
+                    <option value="blue">
+                    <option value="green">
+                    <option value="red">
+               </datalist>
+               <label>color:</label>
+               <input type="color"><br>
+               <label>arrival date</label>
+               <input type="date"><br>
+               <label>arrival time:</label>
+               <input type="time"><br>
+               <button type="submit">go</button>
+           </form>
+        </main>
+        <footer>
+        </footer>
+        <script>
+            let x = document.getElementsByName('k')[0];
+            x.addEventListener("change", ()=>{
+                document.getElementsByTagName('span')[0].innerHTML = x.value;
+            });
+        </script>
+    </body>
+</html>
+
+
+
+
+

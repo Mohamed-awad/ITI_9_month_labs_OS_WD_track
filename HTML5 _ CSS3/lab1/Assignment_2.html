@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+           
+            button {
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>vidoe</h1>
+        </header>
+        <main>
+            <video style="width: 600px; height: 600;" controls>
+                <source src="1.mp4">
+            </video><br><br>
+            <input type="range" min="0" value="0" max="918">
+            <br><br>
+            <button>play</button>
+            <button>stop</button>
+            <button><<</button>
+            <button><</button>
+            <button>></button>
+            <button>>></button>
+            <br><br>
+            <label>speed</label>
+            <input type="range" value="5" min= "1" max="10">
+            <br><br>
+            <input type="range" value="5" min="0" max="10">
+            <button>mute</button>
+        </main>
+        <footer>
+        </footer>
+        <script>
+            let vid = document.getElementsByTagName('video')[0];
+            let btns = document.getElementsByTagName('button');
+            let inps = document.getElementsByTagName("input");
+
+
+            btns[0].addEventListener("click", ()=>{
+                vid.play();
+            });
+            btns[1].addEventListener("click", ()=>{
+                vid.pause();
+            });
+            btns[2].addEventListener("click", ()=>{
+                vid.currentTime = 0;
+            });
+            btns[3].addEventListener("click", ()=>{
+                vid.currentTime = vid.currentTime - 5;
+            });
+            btns[4].addEventListener("click", ()=>{
+                vid.currentTime = vid.currentTime + 5;
+            });
+            btns[5].addEventListener("click", ()=>{
+                vid.currentTime = vid.duration;
+            });
+            btns[6].addEventListener("click", ()=>{
+                vid.volume = "0";
+            });
+
+            inps[1].addEventListener("change", ()=>{
+                vid.playbackRate = inps[0].value;
+            });
+
+            inps[2].addEventListener("change", ()=>{
+                let xx = parseInt(inps[1].value);
+                xx /= 10.00;
+                vid.volume = xx;
+            });
+
+            vid.addEventListener('timeupdate', ()=>{
+                inps[0].value = vid.currentTime;
+            })
+         </script>
+    </body>
+</html>
+
+
+
+
+

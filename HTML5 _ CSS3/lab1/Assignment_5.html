@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+           
+            button {
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Form</h1>
+        </header>
+        <main>
+            <label>red:</label>
+            <input type="range" value="10" min="0" max="255">
+            <br>
+            <label>green:</label>
+            <input type="range" value="10" min="0" max="255"><br>
+            <label>blue: </label>
+            <input type="range" value="10" min="0" max="255"><br>
+            <p>hhhhhhhhhhhhhh</p>
+        </main>
+        <footer>
+        </footer>
+        <script>
+            let inps = document.getElementsByTagName('input');
+            let pp = document.getElementsByTagName('p')[0];
+            let r = inps[0].value;
+            let g = inps[1].value;
+            let b = inps[2].value;
+            inps[0].addEventListener('change', () =>{
+                r = inps[0].value;
+                pp.style.color = `rgb(${r},${g},${b})`; 
+            });
+            inps[1].addEventListener('change', () =>{
+                g = inps[1].value;
+                pp.style.color = `rgb(${r},${g},${b})`;
+            });
+            inps[2].addEventListener('change', () =>{
+                b = inps[2].value;
+               pp.style.color = `rgb(${r},${g},${b})`; 
+            });
+        </script>
+    </body>
+</html>
+
+
+
+
+

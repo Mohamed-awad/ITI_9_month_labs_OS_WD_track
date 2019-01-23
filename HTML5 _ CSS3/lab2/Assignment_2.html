@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            li { 
+                padding: 20px 30px;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>TO do List</h1>
+        </header>
+        <main>
+            <input type="text" style="font-size: 20px" > <button>add</button>
+            <button>Captilize</button>
+            <div>
+                <ul id="con">
+                </ul>
+            </div>
+        </main>
+        <script>
+            let i = 0;
+            //localStorage.clear();
+            if(localStorage.getItem("index") !== null){
+                i = parseInt(localStorage.getItem("index"));
+            }
+            else {
+                localStorage.setItem("index", 0);
+            }
+            let del_it = function(e) {
+                localStorage.removeItem(e.target.id);
+                e.target.parentElement.removeChild(e.target);
+            }
+            let myw = new Worker("wscript.js");
+            let inps = document.getElementsByTagName('input');
+            let btns = document.getElementsByTagName('button');
+            
+            let container = document.getElementById("con");
+            for (let j = 0; j < localStorage.length ; j++) {
+                if(localStorage.getItem(localStorage.key(j)) !== null && localStorage.key(j) !== "index"){
+                    let n = document.createElement('li');
+                    n.id = localStorage.key(j);
+                    n.innerHTML = localStorage.getItem(localStorage.key(j));
+                    n.onclick = del_it;
+                    container.appendChild(n);
+                }
+            }
+            
+            btns[0].addEventListener('click', ()=>{
+                if(inps[0].value !== "")
+                {
+                    let xx = inps[0].value;
+                    inps[0].value = "";
+                    localStorage.setItem(i, xx);
+                    let n = document.createElement('li');
+                    n.innerHTML = xx;
+                    n.id = i;
+                    n.onclick = del_it;
+                    container.appendChild(n);
+                    i++;
+                    localStorage.setItem("index", i);                
+                }
+            });
+
+
+            btns[1].addEventListener('click', (e)=>{
+                if(inps[0].value !== "")
+                {
+                    myw.postMessage({value : inps[0].value});
+                    console.log('Message posted to worker');
+                    myw.onmessage = function(e) {
+                        let xx = e.data.value;
+                        inps[0].value = "";
+                        localStorage.setItem(i, xx);
+                        let n = document.createElement('li');
+                        n.innerHTML = xx;
+                        n.id = i;
+                        n.onclick = del_it;
+                        container.appendChild(n);
+                        i++;
+                        localStorage.setItem("index", i);               
+                    }   
+                }
+            });
+
+        </script>
+    </body>
+</html>
