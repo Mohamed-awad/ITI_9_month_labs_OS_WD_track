@@ -1,0 +1,11 @@
+
+#tt{
+	-fx-font-size: 40px;
+    -fx-font-family: sans-serif;
+    -fx-background-color: #ffffff;
+    -fx-fill: red ;
+}
+
+#rr {
+	-fx-fill: linear-gradient(black, white, black);   
+}
