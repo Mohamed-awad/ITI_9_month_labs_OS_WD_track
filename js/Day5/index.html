@@ -1,0 +1,165 @@
+<html>
+	<head>
+		<style>
+			p.cls1{
+				height:20px;
+				border:1px solid #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<div class='container'>
+			<p id="my-para">Hello World</p>
+			<div id="my-div">
+				myText
+				<a href="http://www.google.com">Google</a>
+				<p>Hi there</p>
+			</div>
+		</div>
+		<div class='container'>
+			<p id="id1" class="cls1"></p>
+			<p id="id2" class="cls1"></p>
+			<p id="id3" class="cls1"></p>
+			<form id='my-form'>
+				<input type="text" name='first-name'>
+				<input type="text" name = 'last-name'>
+			</form>
+			<div name='div-name'>This is div name</div>
+			<a href="http://www.yahoo.com">Yahoo</a>
+		</div>
+		<div class="container">
+			<ul>
+				<li>Python</li>
+				<li>Java</li>
+				<li>JavaScript</li>
+				<li>C</li>
+				<li><a id='fb' href="http://www.facebook.com">Facebook</a></li>
+				
+			</ul>
+			<img id="juice" src="img/lemon-juice.png" width='200' height='200'>
+		</div>
+		<div class='container'>
+			<p >Hello Table</p>
+			<table border='1'>
+				<thead>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Age</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Ahmed</td>
+						<td class='gmail'>ahmed@gmail.com</td>
+						<td class='teen'>19</td>
+					</tr>
+					<tr>
+						<td>Mohsen</td>
+						<td>mohsen@yahoo.com</td>
+						<td class='teen'>17</td>
+					</tr>
+					<tr>
+						<td>Ibrahim</td>
+						<td class='gmail'>ibrahim@gmail.com</td>
+						<td>21</td>
+					</tr>
+					<tr>
+						<td class='female'>Salma</td>
+						<td >salma@hotmail.com</td>
+						<td>22</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script src="lab2.js"></script>
+		<script>
+		function makeInheritance(child,parent){
+		 	child.prototype = Object.create(parent.prototype);
+		 	child.prototype.constructor = child;
+		 }
+		 //Animal Constructor
+		 var Animal = function(aname,age){
+		 	this.name = aname;
+		 	if(age>0)
+		 		this.age = age;
+		 	else
+		 		this.age = 0;
+		 };
+
+		 //Add to Animal Protoype
+		 Animal.prototype.sayMyName = function(){
+		 	console.log("My Name is "+ this.name);
+		 }
+
+		 Animal.prototype.sayMyAge = function(){
+		 	console.log("My Age is "+ this.age);
+		 }
+		 Animal.prototype.name = "Scar";
+
+		 var lion = new Animal("Simba",4);
+
+		 //Bird Constructor
+		 var Bird = function(aname,age,canFly){
+		 	this.canFly = canFly;
+		 	Animal.call(this,aname,age);
+		 };
+
+
+
+		 //Make Bird Inherits from Animal
+		 makeInheritance(Bird,Animal);
+		 Bird.prototype.sayMyName = function(){
+		 	Animal.prototype.sayMyName.call(this);
+		 	console.log("I'm Bird I have No Name");
+		 }
+		 var penguin = new Bird("Amigos",-14,false);
+		 // penguin.sayMyName();
+		 // var elephant = new Animal("Dumbo");
+		 // person.getName();
+		 function x(name,age){
+		 	console.log(arguments);
+		 }
+		 x("Ahmed");
+		 var persons = [{age:13},{age:14},{age:15}];
+		 var pars = document.getElementsByClassName("cls1");
+		 for (var i = 0; i < pars.length; i++) {
+		 	pars[i].addEventListener("click", function(e){
+		 		e.target.textContent = this.age;
+		 	}.bind(persons[i]));
+		 };
+
+		 var Contact = function(aname,phone,email){
+		 	var name;
+		 	Object.defineProperty(this, "id", {
+		 		value:new Date().getTime().toString()+ parseInt(Math.random()*100)
+		 	});
+
+		 	Object.defineProperty(this, "name", {
+		 		get:function(){
+		 			return name;
+		 		},
+		 		set:function(v){
+		 			var x = v.split(" ");
+		 			if(x.length > 1){
+		 				name = x[0][0] + "."+x[1];
+		 			}else{
+		 				name = v;
+		 			}
+		 			
+		 		}
+		 	});
+		 	this.name = aname;
+		 }
+		 var c1 = new Contact("Ahmed Moawad","0100733","ma@id");
+		 var ContactList = function(name){
+		 	this.name = name;
+		 	this.contacts = {}
+		 }
+		 ContactList.prototype.addContact = function(c){
+		 	this.contacts[c.id] = c;
+		 }
+		 var clist = new ContactList("Friends");
+		 clist.addContact(c1);
+
+		</script>
+	</body>
+</html>
